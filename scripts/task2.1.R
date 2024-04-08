@@ -29,9 +29,18 @@
 
 mean_temp <- rast("data/mean_bottom_temperature_EPSG-9221.tif")
 
+trwl_ctch <- read.csv("data/trawl_survey_catches.csv")
+
 
 #####################################################################################
-###
+### select only the top ten species in the trawl catches
+
+top_10 <- trwl_ctch %>%
+  filter(!is.na(genus)) %>% #remove na's
+  count(genus)%>%
+  order(n) %>%
+  slice_head(n = 10)
+
 
 #####################################################################################
 ### unload packages
