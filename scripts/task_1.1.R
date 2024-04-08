@@ -60,23 +60,53 @@ protected_areas <- protected_areas %>%
 
 ## determine the overlaps (intersections) of the ecomap and protected_areas layers and calculate the areas of the new polygons
 eco_pa <- st_intersection(eco_type, st_geometry(protected_areas)) %>%
-  mutate(area_under_mpa = st_area(.))
+  mutate(area_under_pa = st_area(.))
 
-head(eco_mpa)
 
 ## create a table summarizing ecosystem type and it's extent
-eco_mpa_df <- eco_mpa %>%
-  dplyr::select(-geom) %>% # remove the geometry column
+eco_pa_df <- eco_pa %>%
+  dplyr::select(-geometry) %>% # remove the geometry column
   as_tibble() %>%
-  group_by(P_EcosysType) %>%
-  summarise(extent = sum(extent), ## sum the areas
-            area_under_mpa = sum(area_under_mpa))
+  group_by(Name_18, CNSRV_TRGT) %>%
+  summarise(extent = sum(Shape_Area), ## sum the areas
+            area_under_pa = sum(area_under_pa)) %>%
+  ungroup()
 
-dim(eco_mpa_df)
-head(eco_mpa_df)
+dim(eco_pa_df)
+head(eco_pa_df)
+
+#####################################################################################
+### calculate the protection level category for each ecosystem type
+
+## add the proportion of the Ecosystem Type in the PA
+eco_pa_df <- eco_pa_df %>%
+  mutate(percent_protected = 100*(eco_pa_df$area_under_pa/eco_pa_df$extent))# calculate the percent protection of the different ecosystems within the PA's
+
+head(eco_pa_df)
+
+## add the proportion of the Ecosystem Type conservation target reached
+eco_pa_df <- eco_pa_df %>%
+  mutate(percent_protected_achieved = 100*(eco_pa_df$percent_protected/eco_pa_df$CNSRV_TRGT))# calculate the percent protection of the different ecosystems within the PA's
+
+head(eco_pa_df)
+
+eco_pa_df <-eco_pa_df %>%
+  dplyr::select(-extent)
+
+#####################################################################################
+### convert the units
+
+## set the units to km^2 for two specific columns
+eco_pa_df <- eco_pa_df %>%
+  mutate(area_under_pa = units::set_units(eco_pa_df$area_under_pa, km^2))# set the units of the "area_under_mpa" column to km^2
+
+head(eco_pa_df)
 
 
 #####################################################################################
-### unload packages
+### save table as a csv file
 
-# detach("package:xxx", unload=TRUE)
+write.csv(eco_pa_df, file = "outputs/task_1.1.csv", row.names = F) # save data frame as CSV
+
+
+#####################################################################################
