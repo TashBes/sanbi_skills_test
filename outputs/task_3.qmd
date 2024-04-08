@@ -1,0 +1,25 @@
+---
+title: "task_3"
+author: "Natasha Besseling"
+format: docx
+editor: visual
+---
+
+## Task 3.1
+
+*Describe a simple inventory system that you could develop so that users of these files could \'at a glance\' examine and/or update pertinent information about the spatial files, Include examples of the generic properties or metadata information that you think are most pertinent and useful to include in such an inventory.*
+
+The inventory would be housed in an excel file on a shared platform. It would have two sheets. The first would be a field descriptor sheet that contains descriptions and explanations of each field in the metadata sheet and an explanation of how to use the inventory.
+
+The second sheet would be the metadata sheet with each row containing information for a single spatial layer with several columns describing it. The most important columns to include (not in order of importance) and derived from the darwin core metadata standards would be the filename, a description of the layer, the date the file was made, the lineage of how the file has been changed/ iterated upon, the author and author affiliation, the geometry informations such as where it is a vector or raster, the crs, the resolution, and the extent, the license attached to it, the filepath, and the name/ information of the person who created the metadata.
+
+## Task 3.2
+
+*Describe what system you would recommend (or put
+in place) so that the few spatial files that will be developed/improved on in
+future have: a) a well documented history of their changes, b) are accessible
+in a centralised location by multiple collaborators that work on them, and c)
+are adequately and regularly backed up to ensure they will not be lost due to a
+hardware or software failure.*
+
+I would set up a Gitlab project for each spatial layer that needed to be updated and worked on. The benefit of a Gitlab project is that it is version controlled through git, meaning that all changes and updates will be tracked. It is also an ideal platform to collaborate with others on projects and changes can easily be merged and updated. The project is hosted online as well as locally ensuring that the work is saved in case of any hardware failure.

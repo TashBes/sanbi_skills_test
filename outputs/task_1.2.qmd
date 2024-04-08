@@ -1,0 +1,12 @@
+---
+title: "task_1.2"
+author: "Natasha Besseling"
+format: docx
+editor: visual
+---
+
+## 
+
+To present the results of the protection level of the ecosystems calculated in question 1.1 I would present the number of ecosystems, the proportion of which are represented within the protected area network and then the proportion that fall into well, moderately, poor, and not protected. I would use a table and bar graph to represent these summary statistics.
+
+I would then look at which ecosystems are least protected and least represented in the protected areas network and use this to highlight the ecosystems that are a priority to improve protection for or extend protection to. This will help to give policy makers a clear direction and idea of how to take the most effective action to improve the protection of these ecosystems.
